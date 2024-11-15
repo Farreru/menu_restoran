@@ -1,0 +1,72 @@
+@startuml thanis-cafe
+title Flowchart Website Thanis Cafe
+start
+:Masuk Halaman Web Utama;
+:Halaman Login;
+:Masukkan Email dan Password;
+:Cek Kredensial;
+if (Kredensial Valid?) then (ya)
+    if (Role?) then (Admin)
+        :Akses Menu Admin;
+        repeat
+            :Pilih Menu;
+            switch (Jenis Menu)
+            case (Menu Pengguna)
+                :Kelola Data Pengguna;
+                :CRUD Pengguna;
+            case (Menu Produk)
+                :Kelola Data Produk;
+                :CRUD Produk;
+            case (Laporan Penjualan)
+                :Lihat Laporan;
+                :Generate Laporan;
+                :Ekspor PDF;
+                :Ekspor Excel;
+            case (Transaksi)
+                :Tampilkan Katalog Produk;
+                :Pilih Produk;
+                :Tambah ke Keranjang;
+                if (Lanjut Shopping?) then (Ya)
+                    :Kembali ke Katalog;
+                else (Tidak)
+                    :Checkout;
+                    :Generate QR Code Pembayaran;
+                    :Print QR Code;
+                    :Proses Pembayaran;
+                endif
+            case (Logout)
+                :Keluar Sistem;
+                break
+            endswitch
+        repeat while (Pilih Menu Lain?) is (Ya)
+        ->Tidak;
+    else (User)
+        :Akses Menu User;
+        repeat
+            :Pilih Menu;
+            switch (Jenis Menu)
+            case (Transaksi)
+                :Tampilkan Katalog Produk;
+                :Pilih Produk;
+                :Tambah ke Keranjang;
+                if (Lanjut Shopping?) then (Ya)
+                    :Kembali ke Katalog;
+                else (Tidak)
+                    :Checkout;
+                    :Generate QR Code Pembayaran;
+                    :Print QR Code;
+                    :Proses Pembayaran;
+                endif
+            case (Logout)
+                :Keluar Sistem;
+                break
+            endswitch
+        repeat while (Pilih Menu Lain?) is (Ya)
+        ->Tidak;
+    endif
+else (tidak)
+    :Tampilkan Pesan Error;
+    :Kembali ke Halaman Login;
+endif
+stop
+@enduml

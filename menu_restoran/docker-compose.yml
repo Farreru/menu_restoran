@@ -1,0 +1,33 @@
+version: '3'
+services:
+  # PHP service (PHP 8.2 with Apache)
+  php:
+    build: ./ # Point to the folder containing Dockerfile
+    container_name: php_container
+    volumes:
+      - ./src:/var/www/html # Mount the source code to the container
+    networks:
+      - webnet
+    ports:
+      - "80:80" # Expose Apache on port 80
+
+  # MariaDB service
+  db_sample:
+    image: mariadb:10.2
+    container_name: mariadb_container
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes" # Allow empty root password
+      MYSQL_DATABASE: menu_restoran # Default database to be created
+      MYSQL_USER: root # MySQL user
+      MYSQL_PASSWORD: "" # No password for user
+    volumes:
+      - ./mysql/data:/var/lib/mysql # Mount persistent data for MariaDB
+      - ./mysql/init.sql:/docker-entrypoint-initdb.d/init.sql # SQL file for automatic import
+    ports:
+      - "3306:3306" # Expose MariaDB on local port 3306
+    networks:
+      - webnet
+
+networks:
+  webnet:
+    driver: bridge

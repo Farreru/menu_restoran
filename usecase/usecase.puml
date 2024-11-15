@@ -1,0 +1,50 @@
+@startuml
+title Use Case Website Menu Restoran
+
+actor Admin
+actor User
+
+usecase "Login" as UC1
+usecase "Kelola Data Pengguna" as UC2
+usecase "Kelola Data Produk" as UC3
+usecase "Lihat Laporan Penjualan" as UC4
+usecase "Generate Laporan" as UC5
+usecase "Ekspor Laporan (PDF/Excel)" as UC6
+usecase "Transaksi Pembelian" as UC7
+usecase "Pilih Produk" as UC8
+usecase "Tambah ke Keranjang" as UC9
+usecase "Checkout" as UC10
+usecase "Generate QR Code Pembayaran" as UC11
+usecase "Proses Pembayaran" as UC12
+usecase "Logout" as UC13
+usecase "Tampilkan Pesan Error" as UC14
+
+Admin --> UC1
+Admin --> UC2
+Admin --> UC3
+Admin --> UC4
+Admin --> UC5
+Admin --> UC6
+Admin --> UC7
+Admin --> UC13
+
+User --> UC1
+User --> UC7
+User --> UC8
+User --> UC9
+User --> UC10
+User --> UC11
+User --> UC12
+User --> UC13
+
+UC7 --> UC8
+UC7 --> UC9
+UC7 --> UC10
+UC10 --> UC11
+UC10 --> UC12
+UC13 --> UC1
+
+UC4 --> UC5
+UC5 --> UC6
+
+@enduml

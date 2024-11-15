@@ -1,0 +1,12 @@
+.bg-black {
+  background-color: #181818;
+}
+
+.text-yellow {
+  color: #fadd5a !important;
+}
+
+td, th {
+    text-align: center;
+    text-transform: capitalize;
+}
